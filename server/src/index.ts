@@ -5,7 +5,6 @@ import { readFileSync } from "fs";
 import { gql } from "graphql-tag";
 import resolvers from './resolvers.js';
 
-
 const typeDefs = gql(
     readFileSync(resolve(".", "./src/schema.graphql"), {
       encoding: "utf-8",
