@@ -1,4 +1,4 @@
-# simple_task_list_api
+# Simple Task List API
 
 ## Table of Contents
 - [Description](#description)
@@ -9,6 +9,7 @@
   - [Add a New Task](#add-a-new-task)
   - [Toggle Task Completion](#toggle-task-completion)
   - [Delete a Task](#delete-a-task)
+- [Future Expansion](#future-expansion)
 
 
 ## Description 
@@ -26,13 +27,21 @@ cd server
 ```
 npm install 
 ```
-4. To run the API locally run the following command: 
+4. Set up the local database. Run the following command to create a local SQLite database from the Prisma schema
+```
+npx prisma migrate dev --name tasks
+```
+The command above creates an empty database. If you would like to populate your local database with an initial record, please run the following command: 
+```
+npx tsx src/script.ts
+```
+5. To run the API locally run the following command: 
 ```
 npm start
 ```
 This will open a local Apollo Sandbox where we can query and update the task list data stored in Prisma. Please see the available operations section below. 
 
-5. If you are only interested in the data stored in Prisma you can run the following command to locally view and update the stored data: 
+6. If you are only interested in the data stored in Prisma you can run the following command to locally view and update the stored data: 
 ```
 npx prisma studio
 ```
@@ -120,5 +129,15 @@ mutation {
 }
 ```
 
+## Future Expansion 
+In the future further validation of user input will be required. The [Zod Validation Pothos plugin](https://pothos-graphql.dev/docs/plugins/zod) could be integrated to handle some of this functionality. Please find below potential areas for validation:
+- *tasks*: Sanitize any given optional search input to reduce risk of injection attacks. 
+- *task*: Ensure that provided ID is in the correct format i.e. correct data type provided. Carry out data sanitization. 
+- *addTask*: Ensure that a valid length string is provided. Define and enforce how long the title string could be. Carry out data sanitization.  
+- *toggleTask*: Ensure that provided ID is in the correct format i.e. correct data type provided. Carry out data sanitization. 
+- *deleteTask*: Ensure that provided ID is in the correct format i.e. correct data type provided. Carry out data sanitization. 
 
-
+Other potential areas for expansion could include:
+- Creating a seperate table to store completed tasks 
+- Allow users to create subtasks or relate tasks belonging to the same group to one another
+- Adding a deadline field for tasks and returning the list of tasks based on the proximity to the deadline. 

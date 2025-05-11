@@ -1,10 +1,12 @@
 import { builder } from "../builder.js";
 import { PrismaClient } from '@prisma/client';
 
+
+// Establish connection to the Prisma client
 const prisma = new PrismaClient();
 
 
-// Declare the task object type 
+//Create Task Pothos Object based on Prisma model
 builder.prismaObject('Task', {
     fields: (t) => ({
         id: t.exposeID('id'),
@@ -16,7 +18,7 @@ builder.prismaObject('Task', {
     }),
 });
 
-// Queries on Prisma data
+// Define queries on Prisma data
 builder.queryType({
     fields: (t) => ({
         // Return all tasks with optional search argument to filter by title
@@ -34,9 +36,9 @@ builder.queryType({
                         contains: args.search,
                       },
                     }
-                  : {},
+                  : {}, // If no search arg is provided return all tasks
               }).then((tasks) => {
-                return tasks.length > 0 ? tasks : null; // Return null if no tasks found
+                return tasks.length > 0 ? tasks : null; // Returns null if no tasks are found
               });  
             },
           }),

@@ -3,8 +3,11 @@ import {PrismaClient} from "@prisma/client"
 const prisma = new PrismaClient()
 
 async function main() {
-    const allTasks = await prisma.task.findMany()
-    console.log(allTasks)
+  const newTask = await prisma.task.create({
+    data: {
+      title: 'Visit Lush Spa on Oxford Street',
+    },
+  })
 }
 
 main()

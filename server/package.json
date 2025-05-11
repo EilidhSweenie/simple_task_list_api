@@ -16,9 +16,9 @@
     "@apollo/server": "^4.12.0",
     "@pothos/core": "^4.6.2",
     "@pothos/plugin-prisma": "^4.8.1",
+    "@pothos/plugin-zod": "^4.2.1",
     "graphql": "^16.11.0",
     "graphql-scalars": "^1.24.2",
-    "graphql-tag": "^2.12.6",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
