@@ -1,0 +1,13 @@
+# Task information for a single task .
+type Task {
+    id: ID! # The unique ID for the task
+    title: String! # The name of the task
+    completed: Boolean # If the task is completed or not 
+    createdAt: String # Timestamp for when the task was created
+    updatedAt: String # Timestamp for when the task was updated 
+}
+
+# tasks query returns an array of Tasks, this may be an empty list if no tasks are available
+type Query{
+    tasks: [Task!]!
+}    
