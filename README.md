@@ -13,13 +13,13 @@
 
 
 ## Description 
-This repository contains a simple local API that can be used to maintain a list of tasks and their completion status.
+This repository contains a simple API that can be used to maintain a list of tasks and their completion status stored on a local database.
 
-This is implemented using a GraphQL API server using Node.js, TypeScript, Apollo Server and Prisma (SQLite).  
+This is implemented using a GraphQL API server and Node.js, TypeScript, Apollo Server, Prisma, SQLite and Pothos.  
 
 ## How To Run Locally
-1. Clone this repository to your local machine. Ensure that you have Node.js and npm installed [Installation Instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm). 
-2. Open the terminal and navigate to the root folder named server: 
+1. Clone this repository to your local machine. Ensure that you have Node.js and npm installed [Node Installation Instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm). 
+2. Open a new terminal and navigate to the root folder named server: 
 ```
 cd server
 ```
@@ -39,9 +39,9 @@ npx tsx src/script.ts
 ```
 npm start
 ```
-This will open a local Apollo Sandbox where we can query and update the task list data stored in Prisma. Please see the available operations section below. 
+This will open a local Apollo Sandbox where we can query and update the task list data stored in the local database. Please see the available operations section below for a list of actions that can be carried out on the data. 
 
-6. If you are only interested in the data stored in Prisma you can run the following command to locally view and update the stored data: 
+6. If you would like to view and update the data in the local databse directly you can run the following command: 
 ```
 npx prisma studio
 ```
@@ -50,7 +50,7 @@ npx prisma studio
 ## Available Operations
 
 ### List All Tasks 
-Run the below query from the Operation section of the sandbox to list all of the available tasks. Returns an empty list if no matching tasks are available.
+Run the below query from the Operation section of the sandbox to list all of the available tasks. Returns null if no matching tasks are available.
 ```
 query {
   tasks{
@@ -62,7 +62,7 @@ query {
   }
 }
 ```
-Optionally provide a search argument to search for the task title. Returns null if no matching tasks are available:
+You may also optionally provide a search argument to search for the task title. Returns null if no matching tasks are available:
 ```
 query {
   tasks(search: "task") {
@@ -76,7 +76,7 @@ query {
 ```
 
 ### Return a single task by ID
-Run the below query from the Operation section of the sandbox to list a single task when given a corresponding ID. Replace ADD_ID_HERE with the ID you would like to search for. Returns null if no matching tasks are available.
+Run the below query from the Operation section of the sandbox to list a single task when given a corresponding ID. Replace ADD_ID_HERE with the ID you would like to search for. ID is a numerical string value e.g. "1" or "10". Returns null if no matching tasks are available.
 ```
 query {
   task(id: "ADD_ID_HERE") {
@@ -102,8 +102,8 @@ mutation{
 }
 ``` 
 
-### Toggle on a single task ID
-Run the below mutation from the Operation section of the sandbox to update a single task when given a corresponding ID. Replace ADD_ID_HERE with the ID you would like to update. Returns null if no matching tasks are available.
+### Toggle task completion
+Run the below mutation from the Operation section of the sandbox to update a single task when given a corresponding ID. Replace ADD_ID_HERE with the ID you would like to update. ID is a numerical string value e.g. "1" or "10". Returns null if no matching tasks are available.
 ```
 mutation {
   toggleTask(id: "ADD_ID_HERE") {
@@ -116,7 +116,7 @@ mutation {
 }
 ```
 ### Delete a task
-Run the below mutation from the Operation section of the sandbox to delete a single task when given a corresponding ID. Replace ADD_ID_HERE with the ID you would like to delete. Returns null if no matching tasks are available.
+Run the below mutation from the Operation section of the sandbox to delete a single task when given a corresponding ID. Replace ADD_ID_HERE with the ID you would like to delete. ID is a numerical string value e.g. "1" or "10". Returns null if no matching tasks are available.
 ```
 mutation {
   deleteTask(id: "ADD_ID_HERE") {
