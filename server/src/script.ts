@@ -2,6 +2,7 @@ import {PrismaClient} from "@prisma/client"
 
 const prisma = new PrismaClient()
 
+// Inserts an initial record into the local database 
 async function main() {
   const newTask = await prisma.task.create({
     data: {
